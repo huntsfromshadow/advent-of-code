@@ -1,4 +1,5 @@
-from utils.aoc_tasks import setup_day
+from utils.aoc_tasks import setup_day, submit_answer
+from utils.aoc_client import post_answer
 import click
 from utils.config import CONFIG
 
@@ -19,5 +20,15 @@ def setup(year, day, lang):
 def status():
     pass
 
+@cli.command()
+@click.argument('year')
+@click.argument('day')
+@click.argument('answer')
+def submit(year, day, answer):
+    click.echo(f'Submitting Answer\nYear: {year} Day: {day} Answer: {answer}')
+    #submit_answer(year, day, answer)
+    post_answer(year, day, answer)
+
 if __name__ == '__main__':
     cli()
+
