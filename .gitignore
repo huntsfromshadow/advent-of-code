@@ -1,3 +1,4 @@
 # File
 __pycache__
 .venv
+aoc_cli.env

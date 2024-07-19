@@ -1,8 +1,6 @@
 from utils.aoc_tasks import setup_day
 import click
-import configparser
-
-config = configparser.ConfigParser()
+from utils.config import CONFIG
 
 @click.group()
 def cli():
