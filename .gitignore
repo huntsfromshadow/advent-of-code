@@ -1,4 +1,4 @@
-# File
-__pycache__
-.venv
-aoc_cli.env
+*.d
+*.o
+cmake-build-debug
+.idea
