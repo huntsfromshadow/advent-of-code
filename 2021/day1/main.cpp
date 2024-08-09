@@ -7,7 +7,13 @@ int main()
 
     try
     {
-        readFileLinesIntoVector("../atest_input.txt");
+        auto lines = readFileLinesIntoVector("../test_input.txt");
+
+        for (auto line : lines)
+        {
+            std::cout << "~ " << line << std::endl;
+        }
+
         return 0;
     }
     catch(...)

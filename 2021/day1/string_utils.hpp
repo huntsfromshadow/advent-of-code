@@ -7,9 +7,12 @@
 
 #include <fstream>
 #include <string>
+#include <vector>
 
-inline void readFileLinesIntoVector(const std::string& fileName) {
+inline std::vector<std::string> readFileLinesIntoVector(const std::string& fileName) {
+    std::vector<std::string> file_lines;
     std::fstream fs;
+
     fs.open(fileName, std::fstream::in);
     if( !fs.good() )
     {
@@ -17,9 +20,14 @@ inline void readFileLinesIntoVector(const std::string& fileName) {
         std::cerr << "Could not open file: " << fileName << std::endl;
     } else
     {
-
+        std::string test;
+        while(std::getline(fs,test) )
+        {
+            file_lines.push_back(test);
+        }
+        fs.close();
     }
+    return file_lines;
 }
-
 
 #endif //STRING_UTILS_HPP
