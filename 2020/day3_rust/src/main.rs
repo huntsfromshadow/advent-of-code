@@ -13,32 +13,37 @@ pub fn load_data(filename: &str) -> String {
 }
 
 fn main() {
-    let r = load_data(TEST_FILE);
+    let r = load_data(INPUT_FILE);
     let w = WoodMap::new(r);
-    println!("{:?}", w);
+    //println!("{:?}", w);
 
     // Now lets actually do the logic
-    let mut tx = 0;
-    let mut ty = 0;
-    let endy = w.template_h + 1;
+    let endy = w.template_h;
 
-    let mut treehit = 0;
+    let vs = vec!((1, 1), (3, 1), (5, 1), (7, 1), (1, 2));
+    for s in vs {
+        let mut tx = 1;
+        let mut ty = 1;
 
-    let slopex = 3;
-    let slopey = 1;
+        let slopex = s.0;
+        let slopey = s.1;
 
-    while (ty < endy) {
-        // move by slope
-        tx = tx + slopex;
-        ty = ty + slopey;
+        let mut treehit = 0;
 
-        println!("Accessing {},{}",tx,ty);
+        while (ty < endy) {
+            // move by slope
+            tx = tx + slopex;
+            ty = ty + slopey;
 
-        let c = w.get_element(tx,ty);
-        if(c == '#') {
-            treehit = treehit + 1;
+            let c = w.get_element(tx, ty);
+            //println!("Accessing {},{} -> {}",tx,ty,c);
+
+            let c = w.get_element(tx, ty);
+            if (c == '#') {
+                treehit = treehit + 1;
+            }
         }
-    }
 
-    println!("Done. Trees Hit - {}", treehit);
+        println!("Done. ({},{}) - Trees Hit - {}", slopex, slopey, treehit);
+    }
 }

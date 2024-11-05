@@ -31,11 +31,21 @@ impl WoodMap {
     }
 
     pub fn gcords_to_lcords(&self, gx: i32, gy: i32) -> (i32, i32) {
-        (gx % self.template_w, gy)
+
+        let mut lx = gx % self.template_w;
+        if(lx == 0) {
+            lx = self.template_w;
+        }
+
+        //println!("g to l - ({}, {} -> {}, {})",
+        //         gx, gy, lx, gy);
+        (lx, gy)
     }
 
     pub fn lcords_to_vcord(&self, lx: i32, ly: i32) -> i32 {
-        ly * self.template_w + lx
+        let fv = ((ly - 1) * self.template_w) + (lx - 1);;
+        //println!("l to v - ({}, {}) -> {}", lx, ly, fv);
+        fv
     }
 
     pub fn get_element(&self, gx: i32, gy: i32) -> char {
