@@ -1,0 +1,3 @@
+%{
+  "iter": {:hex, :iter, "0.1.2", "bd5dbba48ba67e0f134889a4a29f2b377db6cdcee0661f3c29439e7b649e317a", [:mix], [], "hexpm", "e79f53ed36105ae72582fd3ef224ca2539ccc00cdc27e6e7fe69c49119c4e39b"},
+}

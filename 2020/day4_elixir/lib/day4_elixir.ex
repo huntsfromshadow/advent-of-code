@@ -6,7 +6,9 @@ defmodule Day4Elixir do
     {:ok, fdata} = File.read(filename)
 
     String.split(fdata, "\n")
-
+    |> Enum.chunk_by(fn x -> x != "" end)
+    |> Enum.filter(fn x -> x != [""] end)
+    |> IO.inspect()
 
   end
 

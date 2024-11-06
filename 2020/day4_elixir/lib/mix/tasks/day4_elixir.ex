@@ -1,4 +1,4 @@
-defmodule Mix.Tasks.Day1Elixir do
+defmodule Mix.Tasks.Day4Elixir do
   @moduledoc "The hello mix task: `mix help hello`"
   use Mix.Task
 
