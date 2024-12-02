@@ -6,6 +6,8 @@ def check_level(leveldat) -> bool:
 
 def check_change(leveldat):
     previous = None
+    absorbed = False
+
     for e in leveldat:
         if previous is None:
             previous = e
@@ -15,14 +17,20 @@ def check_change(leveldat):
             previous = e
             continue
         else:
-            print(f"Jump by {abs(previous - e)} - Fail")
-            return False
+            if absorbed:
+                print(f"Jump by {abs(previous - e)} - Fail")
+                return False
+            else:
+                print(f"Jump by {abs(previous - e)} - Absorbing")
+                absorbed = True
+                continue
 
     return True
 
 def check_inc_dec(leveldat) -> bool:
     previous = None
     incdec = None
+    absorbed_level = False
 
     for e in leveldat:
         if previous is None:
@@ -37,18 +45,41 @@ def check_inc_dec(leveldat) -> bool:
                 incdec = "decreasing"
                 previous = e
             else:
-                print("Two values same. - Fail")
-                return False
+                if absorbed_level:
+                    print("Two values same. - Fail")
+                    return False
+                else:
+                    print("Two values same. - Absorbing")
+                    absorbed_level = True
+                    previous = e
+                    continue
         else:
             if e > previous and incdec == "decreasing":
-                print("Move from increasing to decreasing - Fail")
-                return False
+                if absorbed_level:
+                    print("Move from increasing to decreasing - Fail")
+                    return False
+                else:
+                    print("Move from increase to decrease - absorbing")
+                    absorbed_level = True
+                    continue
+
             if e < previous and incdec == "increasing":
-                print("Move from decreasing to increasing - Fail")
-                return False
+                if absorbed_level:
+                    print("Move from decreasing to increasing - Fail")
+                    return False
+                else:
+                    print("Move from decreasing to increasing - Absorbing")
+                    absorbed_level = True
+                    continue
+
             if e == previous:
-                print("Two values same. - Fail")
-                return False
+                if absorbed_level:
+                    print("Two values same. - Fail")
+                    return False
+                else:
+                    print("Two values same. - Absorbing")
+                    absorbed_level = True
+                    continue
 
             previous = e
     return True
@@ -58,7 +89,7 @@ def check_inc_dec(leveldat) -> bool:
 def day2():
     input = []
 
-    with open("day2-input.txt") as f:
+    with open("edge-cases.txt") as f:
         dat = f.read()
         lines = dat.splitlines()
 
